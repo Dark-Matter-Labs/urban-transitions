@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Demonstrators - Climate Neutral Cities Initiative</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #1a1a2e;
+            --primary-purple: #6B5B95;
+            --accent-teal: #00C9A7;
+            --accent-orange: #FF6B6B;
+            --text-light: #ffffff;
+            --text-dark: #2d2d2d;
+            --text-gray: #666666;
+            --bg-light: #f8f9fa;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-dark: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(107, 91, 149, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            padding: 0 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--accent-teal);
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 10px 30px rgba(107, 91, 149, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(107, 91, 149, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Partners Section */
+        .partners {
+            padding: 3rem 0;
+            background: rgba(26, 26, 46, 0.05);
+        }
+
+        .partners-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .partners-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .partner-logo {
+            color: var(--text-gray);
+            font-weight: 600;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            opacity: 1;
+        }
+
+        /* Main Content Sections */
+        .section {
+            padding: 5rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--gradient-1);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--bg-light);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .about-visual {
+            position: relative;
+            height: 400px;
+            background: var(--gradient-3);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-visual::before {
+            content: 'System Innovation';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-align: center;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Case Studies */
+        .case-studies {
+            background: var(--bg-light);
+            padding: 5rem 0;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .case-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .case-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .case-header {
+            height: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .case-header.lund {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .case-header.bristol {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .case-content {
+            padding: 2rem;
+        }
+
+        .case-content h3 {
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .case-content p {
+            color: var(--text-gray);
+            line-height: 1.6;
+        }
+
+        /* Timeline */
+        .timeline {
+            padding: 5rem 0;
+            background: white;
+        }
+
+        .timeline-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-date {
+            flex-shrink: 0;
+            width: 150px;
+            text-align: right;
+            font-weight: 600;
+            color: var(--primary-purple);
+        }
+
+        .timeline-content {
+            flex: 1;
+            padding-left: 2rem;
+            border-left: 3px solid var(--gradient-1);
+            position: relative;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 5px;
+            width: 13px;
+            height: 13px;
+            background: var(--primary-purple);
+            border-radius: 50%;
+        }
+
+        .timeline-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .timeline-content p {
+            color: var(--text-gray);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--gradient-dark);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .cta-section p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary-dark);
+            color: var(--text-light);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--accent-teal);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .timeline-item {
+                flex-direction: column;
+            }
+
+            .timeline-date {
+                text-align: left;
+                width: auto;
+            }
+
+            .timeline-content {
+                padding-left: 1rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide-in {
+            opacity: 0;
+            transform: translateX(-30px);
+            animation: slideIn 0.8s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span>🌍</span> System Demonstrators
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#approach">Approach</a></li>
+                <li><a href="#cases">Case Studies</a></li>
+                <li><a href="#timeline">Timeline</a></li>
+                <li><a href="#join">Join Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <span class="hero-badge">Open Invitation • Climate Neutral Cities</span>
+            <h1>Design the Future of Urban Climate Action</h1>
+            <p class="subtitle">
+                Join Viable Cities, UN-Habitat, and Dark Matter Labs in co-designing a new grant call for system demonstrators that accelerate climate-neutral, resilient cities
+            </p>
+            <div class="cta-buttons">
+                <a href="https://form.typeform.com/to/JOGXlMai" target="_blank" class="btn btn-primary">Submit Expression of Interest</a>
+                <a href="#about" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="partners">
+        <div class="partners-container">
+            <div class="partners-grid">
+                <span class="partner-logo">Dark Matter Labs</span>
+                <span class="partner-logo">Viable Cities</span>
+                <span class="partner-logo">UN-Habitat</span>
+                <span class="partner-logo">City of Lund</span>
+                <span class="partner-logo">ViaEuropa</span>
+                <span class="partner-logo">C40</span>
+                <span class="partner-logo">ICLEI</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">About</span>
+                <h2>System Demonstrators for Climate Action</h2>
+                <p class="section-subtitle">
+                    Testing whole-systems approaches to accelerate urban transitions
+                </p>
+            </div>
+            <div class="about-content">
+                <div class="about-text slide-in">
+                    <p>
+                        Following the successful 2021 Climate Smart Cities Challenge, Viable Cities has implemented a programme of system demonstrators in Sweden as part of its mission to support cities in becoming climate neutral by 2030.
+                    </p>
+                    <br>
+                    <p>
+                        System demonstrators are designed to test how whole-systems approaches across governance, finance, infrastructure, data, and citizen engagement can accelerate the transition to climate neutral and resilient cities that are futureproof. They explore how to create an agile and derisked operating framework for public and private actors to design and implement viable businesses and value cases at scale.
+                    </p>
+                    <br>
+                    <p>
+                        Building on this work, Viable Cities, Dark Matter Labs, and UN-Habitat have been collaborating with cities in Brazil, Uganda, Colombia, and the UK to apply and adapt the system demonstrator approach.
+                    </p>
+                </div>
+                <div class="about-visual fade-in"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="approach" class="section features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Our Approach</span>
+                <h2>Accelerating and Scaling the Transition</h2>
+                <p class="section-subtitle">
+                    Key components of the system demonstrator methodology
+                </p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🏛️</div>
+                    <h3>Governance Innovation</h3>
+                    <p>Multi-actor climate city contracts and integrated action plans that enable collaborative decision-making across sectors and stakeholders.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">💰</div>
+                    <h3>Finance Transformation</h3>
+                    <p>Blending public, private, and philanthropic investment to create dynamic ecosystems that accelerate sustainable development.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Infrastructure Systems</h3>
+                    <p>Integrated energy, mobility, and housing solutions that create the conditions for a new climate neutral normal.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">📊</div>
+                    <h3>Data-Driven Insights</h3>
+                    <p>Smart systems and digital tools that optimize resource use and enable evidence-based decision-making.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">👥</div>
+                    <h3>Citizen Engagement</h3>
+                    <p>Community-led co-design processes that ensure solutions meet local needs and priorities.</p>
+                </div>
+                <div class="feature-card fade-in">
+                    <div class="feature-icon">🔄</div>
+                    <h3>Scalable Solutions</h3>
+                    <p>Creating replicable frameworks that can be adapted and applied across different urban contexts globally.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section id="cases" class="section case-studies">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-badge">Game Changers</span>
+                <h2>Cities Leading the Transition</h2>
+                <p class="section-subtitle">
+                    Real-world examples of system demonstrators in action
+                </p>
+            </div>
+            <div class="case-grid">
+                <div class="case-card fade-in">
+                    <div class="case-header lund">
+                        Lund, Sweden
+                    </div>
+                    <div class="case-content">
+                        <h3>EnergyNet: Decentralized Power Revolution</h3>
+                        <p>
+                            A breakthrough in integrating multiple energy solutions into a unified city-wide system. EnergyNet manages electricity distribution like the Internet - decentralized and software-controlled. This collaborative platform brings together public authorities, businesses, and citizens to co-design a sustainable energy network, making low electricity prices and green energy commercially viable at scale.
+                        </p>
+                    </div>
+                </div>
+                <div class="case-card fade-in">
+                    <div class="case-header bristol">
+                        Bristol, UK
+                    </div>
+                    <div class="case-content">
+                        <h3>Affordable Housing Initiative</h3>
+                        <p>
+                            Addressing the housing crisis through aggregation of small brownfield sites to build net-zero social homes. With 18,000 people on waiting lists, this initiative demonstrates how Modern Methods of Construction and multi-stakeholder collaboration can unlock thousands of underutilized sites, aiming to deliver 10,000 homes annually through the Social Housing at Pace Playbook.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section id="timeline" class="section timeline">
+        <div class="timeline-container">
+            <div class="section-header">
+                <span class="section-badge">Timeline</span>
+                <h2>Co-Design Process</h2>
+                <p class="section-subtitle">
+                    Join us in developing the global grant call framework
+                </p>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">January 2026</div>
+                <div class="timeline-content">
+                    <h3>First Co-Design Meeting</h3>
+                    <p>Initial gathering to establish framework and objectives</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">February 2026</div>
+                <div class="timeline-content">
+                    <h3>Second Co-Design Meeting</h3>
+                    <p>Develop call text and operating structure</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">March 2026</div>
+                <div class="timeline-content">
+                    <h3>Final Co-Design Meeting</h3>
+                    <p>Finalize framework and fundraising approach</p>
+                </div>
+            </div>
+            <div class="timeline-item fade-in">
+                <div class="timeline-date">April 2026</div>
+                <div class="timeline-content">
+                    <h3>Launch Decision</h3>
+                    <p>Partners deliberate on international call launch</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="join" class="cta-section">
+        <div class="cta-content fade-in">
+            <h2>Shape the Future of Urban Climate Action</h2>
+            <p>
+                Join governments, development donors, philanthropies, foundations, and investors in co-designing a new standard for system demonstrator funding
+            </p>
+            <div class="cta-buttons">
+                <a href="https://form.typeform.com/to/JOGXlMai" target="_blank" class="btn btn-primary">Submit Expression of Interest</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>About</h4>
+                <p>System Demonstrators is a collaborative initiative by Viable Cities, UN-Habitat, and Dark Matter Labs to accelerate climate-neutral cities globally.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Priority Regions</h4>
+                <p>Brazil</p>
+                <p>California</p>
+                <p>India</p>
+                <p>Sweden</p>
+                <p>Ukraine</p>
+            </div>
+            <div class="footer-section">
+                <h4>Resources</h4>
+                <a href="#">DML System Demo Compass</a>
+                <a href="#">Climate Smart Cities Report</a>
+                <a href="#">Viable Cities Website</a>
+            </div>
+            <div class="footer-section">
+                <h4>Contact</h4>
+                <p>For more information:</p>
+                <a href="mailto:systemdemo@viabilityfund.org">systemdemo@viabilityfund.org</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 System Demonstrators Initiative. Building climate-neutral cities together.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0.1s';
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in and slide-in elements
+        document.querySelectorAll('.fade-in, .slide-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+
+        // Nav background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(26, 26, 46, 0.98)';
+                nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.background = 'rgba(26, 26, 46, 0.95)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
