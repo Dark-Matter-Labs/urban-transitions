@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>System Demonstrators - Climate Neutral Cities Initiative</title>
+    <title>System Demonstrators - Urban Transitions Lab | Viability Fund</title>
     <style>
         * {
             margin: 0;
@@ -12,37 +12,76 @@
         }
 
         :root {
-            --primary-dark: #1a1a2e;
-            --primary-purple: #6B5B95;
-            --accent-teal: #00C9A7;
-            --accent-orange: #FF6B6B;
+            --primary-dark: #2C2416;
+            --primary-brown: #8B6F47;
+            --accent-terracotta: #C17767;
+            --accent-sage: #9CAF88;
+            --accent-sand: #E8DCC4;
+            --accent-ochre: #D4A574;
             --text-light: #ffffff;
-            --text-dark: #2d2d2d;
-            --text-gray: #666666;
-            --bg-light: #f8f9fa;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --gradient-dark: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
+            --text-dark: #2C2416;
+            --text-gray: #6B5D4F;
+            --bg-light: #FAF8F3;
+            --bg-cream: #F5F0E8;
+            --gradient-warm: linear-gradient(135deg, #C17767 0%, #D4A574 100%);
+            --gradient-earth: linear-gradient(135deg, #8B6F47 0%, #9CAF88 100%);
+            --gradient-sunset: linear-gradient(135deg, #E8DCC4 0%, #C17767 100%);
+            --gradient-dark: linear-gradient(180deg, #2C2416 0%, #4A3F2F 100%);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Georgia', 'Times New Roman', serif;
             line-height: 1.6;
             color: var(--text-dark);
             overflow-x: hidden;
+            background: var(--bg-light);
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background: var(--bg-cream);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--accent-sand);
+            font-size: 0.9rem;
+        }
+
+        .top-bar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-gray);
+        }
+
+        .top-bar a {
+            color: var(--primary-brown);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+
+        .top-bar a:hover {
+            color: var(--accent-terracotta);
         }
 
         /* Navigation */
         nav {
-            position: fixed;
+            position: sticky;
             top: 0;
             width: 100%;
-            background: rgba(26, 26, 46, 0.95);
+            background: rgba(250, 248, 243, 0.95);
             backdrop-filter: blur(10px);
             z-index: 1000;
-            padding: 1rem 0;
+            padding: 1.25rem 0;
             transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(232, 220, 196, 0.3);
+        }
+
+        nav.scrolled {
+            background: rgba(250, 248, 243, 0.98);
+            box-shadow: 0 2px 20px rgba(44, 36, 22, 0.08);
         }
 
         .nav-container {
@@ -56,58 +95,70 @@
 
         .nav-logo {
             font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--text-light);
+            font-weight: 600;
+            color: var(--text-dark);
             text-decoration: none;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
         .nav-links a {
-            color: var(--text-light);
+            color: var(--text-dark);
             text-decoration: none;
-            opacity: 0.9;
-            transition: opacity 0.3s ease;
-            font-weight: 500;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            font-weight: 400;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-terracotta);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
             opacity: 1;
         }
 
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
         /* Hero Section */
         .hero {
-            min-height: 100vh;
+            min-height: calc(100vh - 50px);
             background: var(--gradient-dark);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             overflow: hidden;
-            padding-top: 80px;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, rgba(107, 91, 149, 0.1) 0%, transparent 70%);
-            animation: rotate 30s linear infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23C17767" fill-opacity="0.05" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,138.7C672,149,768,203,864,213.3C960,224,1056,192,1152,181.3C1248,171,1344,181,1392,186.7L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.3;
         }
 
         .hero-content {
@@ -120,31 +171,34 @@
 
         .hero-badge {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--accent-teal);
+            background: rgba(232, 220, 196, 0.15);
+            color: var(--accent-sand);
             padding: 0.5rem 1.5rem;
             border-radius: 30px;
             font-size: 0.9rem;
             margin-bottom: 2rem;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(232, 220, 196, 0.2);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .hero h1 {
             font-size: clamp(2.5rem, 5vw, 4rem);
             color: var(--text-light);
             margin-bottom: 1.5rem;
-            font-weight: 800;
+            font-weight: 400;
             line-height: 1.2;
+            letter-spacing: -0.02em;
         }
 
         .hero .subtitle {
             font-size: 1.3rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: rgba(232, 220, 196, 0.9);
             margin-bottom: 3rem;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 300;
         }
 
         .cta-buttons {
@@ -158,38 +212,40 @@
             padding: 1rem 2.5rem;
             text-decoration: none;
             border-radius: 50px;
-            font-weight: 600;
+            font-weight: 500;
             transition: all 0.3s ease;
             display: inline-block;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .btn-primary {
-            background: var(--gradient-1);
+            background: var(--gradient-warm);
             color: white;
-            box-shadow: 0 10px 30px rgba(107, 91, 149, 0.3);
+            box-shadow: 0 10px 30px rgba(193, 119, 103, 0.3);
         }
 
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 40px rgba(107, 91, 149, 0.4);
+            box-shadow: 0 15px 40px rgba(193, 119, 103, 0.4);
         }
 
         .btn-secondary {
             background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: var(--accent-sand);
+            border: 2px solid rgba(232, 220, 196, 0.3);
         }
 
         .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(232, 220, 196, 0.1);
+            border-color: rgba(232, 220, 196, 0.5);
         }
 
         /* Partners Section */
         .partners {
             padding: 3rem 0;
-            background: rgba(26, 26, 46, 0.05);
+            background: var(--bg-cream);
+            border-bottom: 1px solid rgba(232, 220, 196, 0.5);
         }
 
         .partners-container {
@@ -205,18 +261,21 @@
             gap: 2rem;
             justify-content: center;
             align-items: center;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         .partner-logo {
             color: var(--text-gray);
-            font-weight: 600;
+            font-weight: 500;
             opacity: 0.7;
             transition: opacity 0.3s ease;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-size: 0.95rem;
         }
 
         .partner-logo:hover {
             opacity: 1;
+            color: var(--primary-brown);
         }
 
         /* Main Content Sections */
@@ -238,7 +297,7 @@
 
         .section-badge {
             display: inline-block;
-            background: var(--gradient-1);
+            background: var(--gradient-earth);
             color: white;
             padding: 0.3rem 1rem;
             border-radius: 20px;
@@ -246,13 +305,15 @@
             margin-bottom: 1rem;
             text-transform: uppercase;
             letter-spacing: 1px;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .section h2 {
             font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1.5rem;
             color: var(--text-dark);
-            font-weight: 700;
+            font-weight: 400;
+            letter-spacing: -0.02em;
         }
 
         .section-subtitle {
@@ -260,6 +321,7 @@
             color: var(--text-gray);
             max-width: 700px;
             margin: 0 auto;
+            font-weight: 300;
         }
 
         /* About Section */
@@ -283,10 +345,10 @@
         .about-visual {
             position: relative;
             height: 400px;
-            background: var(--gradient-3);
+            background: var(--gradient-sunset);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 60px rgba(193, 119, 103, 0.15);
         }
 
         .about-visual::before {
@@ -296,7 +358,7 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 2rem;
-            font-weight: 700;
+            font-weight: 300;
             color: white;
             text-align: center;
         }
@@ -304,6 +366,7 @@
         /* Features Grid */
         .features {
             padding: 5rem 0;
+            background: var(--bg-cream);
         }
 
         .features-grid {
@@ -317,10 +380,11 @@
             background: white;
             padding: 2.5rem;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 40px rgba(44, 36, 22, 0.05);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(232, 220, 196, 0.2);
         }
 
         .feature-card::before {
@@ -329,19 +393,19 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--gradient-1);
+            height: 3px;
+            background: var(--gradient-warm);
         }
 
         .feature-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 60px rgba(44, 36, 22, 0.1);
         }
 
         .feature-icon {
             width: 60px;
             height: 60px;
-            background: var(--gradient-1);
+            background: var(--gradient-earth);
             border-radius: 15px;
             display: flex;
             align-items: center;
@@ -352,14 +416,15 @@
         }
 
         .feature-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             margin-bottom: 1rem;
             color: var(--text-dark);
+            font-weight: 500;
         }
 
         .feature-card p {
             color: var(--text-gray);
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
         /* Case Studies */
@@ -379,13 +444,14 @@
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 10px 40px rgba(44, 36, 22, 0.05);
             transition: all 0.3s ease;
+            border: 1px solid rgba(232, 220, 196, 0.2);
         }
 
         .case-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 60px rgba(44, 36, 22, 0.1);
         }
 
         .case-header {
@@ -396,15 +462,16 @@
             justify-content: center;
             color: white;
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 400;
+            letter-spacing: -0.02em;
         }
 
         .case-header.lund {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--gradient-earth);
         }
 
         .case-header.bristol {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: var(--gradient-warm);
         }
 
         .case-content {
@@ -414,11 +481,56 @@
         .case-content h3 {
             margin-bottom: 1rem;
             color: var(--text-dark);
+            font-weight: 500;
         }
 
-        .case-content p {
+        .case-summary {
             color: var(--text-gray);
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .case-full {
+            color: var(--text-gray);
+            line-height: 1.7;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            opacity: 0;
+        }
+
+        .case-full.expanded {
+            max-height: 1000px;
+            opacity: 1;
+            padding-top: 1rem;
+        }
+
+        .read-more-btn {
+            background: none;
+            border: none;
+            color: var(--accent-terracotta);
+            font-weight: 500;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
+        .read-more-btn:hover {
+            color: var(--primary-brown);
+        }
+
+        .read-more-btn::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .read-more-btn.expanded::after {
+            transform: rotate(90deg);
         }
 
         /* Timeline */
@@ -444,31 +556,33 @@
             flex-shrink: 0;
             width: 150px;
             text-align: right;
-            font-weight: 600;
-            color: var(--primary-purple);
+            font-weight: 500;
+            color: var(--primary-brown);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .timeline-content {
             flex: 1;
             padding-left: 2rem;
-            border-left: 3px solid var(--gradient-1);
+            border-left: 2px solid var(--accent-sand);
             position: relative;
         }
 
         .timeline-content::before {
             content: '';
             position: absolute;
-            left: -8px;
+            left: -7px;
             top: 5px;
-            width: 13px;
-            height: 13px;
-            background: var(--primary-purple);
+            width: 12px;
+            height: 12px;
+            background: var(--accent-terracotta);
             border-radius: 50%;
         }
 
         .timeline-content h3 {
             margin-bottom: 0.5rem;
             color: var(--text-dark);
+            font-weight: 500;
         }
 
         .timeline-content p {
@@ -487,11 +601,12 @@
         .cta-section::before {
             content: '';
             position: absolute;
-            width: 200%;
-            height: 200%;
-            top: -50%;
-            left: -50%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, transparent 70%);
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23E8DCC4" fill-opacity="0.05" d="M0,64L60,74.7C120,85,240,107,360,106.7C480,107,600,85,720,90.7C840,96,960,128,1080,133.3C1200,139,1320,117,1380,106.7L1440,96L1440,0L1380,0C1320,0,1200,0,1080,0C960,0,840,0,720,0C600,0,480,0,360,0C240,0,120,0,60,0L0,0Z"></path></svg>');
+            background-size: cover;
+            background-position: top;
+            opacity: 0.3;
         }
 
         .cta-content {
@@ -506,12 +621,15 @@
             color: white;
             font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: -0.02em;
         }
 
         .cta-section p {
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(232, 220, 196, 0.9);
             font-size: 1.2rem;
             margin-bottom: 2.5rem;
+            font-weight: 300;
         }
 
         /* Footer */
@@ -533,31 +651,41 @@
 
         .footer-section h4 {
             margin-bottom: 1rem;
-            color: var(--accent-teal);
+            color: var(--accent-sand);
+            font-weight: 500;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .footer-section p,
         .footer-section a {
-            color: rgba(255, 255, 255, 0.7);
+            color: rgba(232, 220, 196, 0.7);
             text-decoration: none;
             display: block;
             margin-bottom: 0.5rem;
             transition: color 0.3s ease;
+            line-height: 1.6;
         }
 
         .footer-section a:hover {
-            color: white;
+            color: var(--accent-sand);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.5);
+            border-top: 1px solid rgba(232, 220, 196, 0.1);
+            color: rgba(232, 220, 196, 0.5);
+            font-size: 0.9rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            .top-bar-content {
+                flex-direction: column;
+                gap: 0.5rem;
+                font-size: 0.8rem;
+            }
+
             .nav-links {
                 display: none;
             }
@@ -628,11 +756,19 @@
     </style>
 </head>
 <body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <span>Urban Transitions Lab | A Dark Matter Labs Initiative</span>
+            <a href="https://viabilityfund.org/" target="_blank">Part of the Viability Fund →</a>
+        </div>
+    </div>
+
     <!-- Navigation -->
     <nav>
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <span>🌍</span> System Demonstrators
+                <span>🌱</span> System Demonstrators
             </a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
@@ -647,7 +783,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content fade-in">
-            <span class="hero-badge">Open Invitation • Climate Neutral Cities</span>
+            <span class="hero-badge">Urban Transitions Lab • Open Invitation</span>
             <h1>Design the Future of Urban Climate Action</h1>
             <p class="subtitle">
                 Join Viable Cities, UN-Habitat, and Dark Matter Labs in co-designing a new grant call for system demonstrators that accelerate climate-neutral, resilient cities
@@ -765,9 +901,21 @@
                     </div>
                     <div class="case-content">
                         <h3>EnergyNet: Decentralized Power Revolution</h3>
-                        <p>
-                            A breakthrough in integrating multiple energy solutions into a unified city-wide system. EnergyNet manages electricity distribution like the Internet - decentralized and software-controlled. This collaborative platform brings together public authorities, businesses, and citizens to co-design a sustainable energy network, making low electricity prices and green energy commercially viable at scale.
+                        <p class="case-summary">
+                            A breakthrough in integrating multiple energy solutions into a unified city-wide system. EnergyNet manages electricity distribution like the Internet - decentralized and software-controlled.
                         </p>
+                        <div class="case-full" id="lund-full">
+                            <p>
+                                EnergyNet is a new way to manage the distribution of electricity, addressing major challenges in managing local production, storage and sharing. The system is suitable for use in energy communities, but can also be used outside. EnergyNet makes it possible to connect an unlimited amount of local energy resources, which creates completely new conditions for low electricity prices for large quantities of green electricity.
+                            </p>
+                            <p style="margin-top: 1rem;">
+                                How does it work? EnergyNet is developed according to the same principles as the Internet. It is therefore decentralized, which makes it significantly more resistant to disruptions. Through new types of power electronics, electricity distribution can now be completely controlled by software. Classic challenges for the electricity grid such as frequency and balance are no longer blocking. The new networks are not only decentralized but also distributed, which makes it easier to solve electricity needs as close to the consumer as possible.
+                            </p>
+                            <p style="margin-top: 1rem;">
+                                The EnergyNet in Lund, driven by the CoAction initiative, was set up as a collaborative multi-stakeholder platform bringing together public authorities, businesses, and citizens to co-design a sustainable energy network. The approach integrates local renewable energy sources, smart grids, and demand-side management to optimize energy use across districts. This collaborative governance model fosters cross-sector partnerships and supports a data-driven approach to managing energy efficiency, helping Lund meet its climate targets while offering a model for scalable urban energy transitions globally.
+                            </p>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleReadMore('lund')">Read more</button>
                     </div>
                 </div>
                 <div class="case-card fade-in">
@@ -776,9 +924,24 @@
                     </div>
                     <div class="case-content">
                         <h3>Affordable Housing Initiative</h3>
-                        <p>
-                            Addressing the housing crisis through aggregation of small brownfield sites to build net-zero social homes. With 18,000 people on waiting lists, this initiative demonstrates how Modern Methods of Construction and multi-stakeholder collaboration can unlock thousands of underutilized sites, aiming to deliver 10,000 homes annually through the Social Housing at Pace Playbook.
+                        <p class="case-summary">
+                            Addressing the housing crisis through aggregation of small brownfield sites to build net-zero social homes using innovative construction methods and collaborative financing.
                         </p>
+                        <div class="case-full" id="bristol-full">
+                            <p>
+                                Bristol's Affordable Housing Initiative, driven by the Housing Festival, represents a game-changing approach to addressing the city's housing crisis, combining climate-smart and social rent housing solutions. In response to a chronic social housing deficit, with 18,000 people on the waiting list and over 1,000 families in temporary accommodation, the initiative focused on aggregating small brownfield sites across the city to enhance housing viability using Modern Methods of Construction (MMC).
+                            </p>
+                            <p style="margin-top: 1rem;">
+                                The housing system demonstrator aims to test this aggregation model by building 25 zero-carbon social rent homes across six small sites in Bristol, which would not have been feasible individually. A digital tool was developed to help identify these sites and assess their viability, while a collaborative multi-stakeholder approach—involving Bristol City Council, Atkins Realis, Edaroth, and Lloyds Banking Group—was key to moving from concept to implementation. The project's unique approach also includes a redefined notion of 'viability', integrating social infrastructure investments alongside traditional capital repayment models.
+                            </p>
+                            <p style="margin-top: 1rem;">
+                                The initiative's innovative approach has garnered support for scaling through the Small Sites Aggregator program, which aims to unlock thousands of small, underutilized brownfield sites across the UK. This strategy is seen as a path towards building 10,000 homes annually and addressing wider housing shortages, with ongoing testing in cities such as Bristol, Sheffield, and London's Lewisham Borough.
+                            </p>
+                            <p style="margin-top: 1rem;">
+                                Through this work, the Housing Festival has created the Social Housing at Pace Playbook, which outlines a replicable ecosystem solution to deliver affordable, climate-smart housing at scale. By blending public, private, and philanthropic investment, the initiative created a dynamic ecosystem that accelerates the delivery of affordable housing, prioritizing local engagement and long-term sustainability. This approach is revolutionizing how cities can rethink housing challenges by embedding innovation into the policy framework.
+                            </p>
+                        </div>
+                        <button class="read-more-btn" onclick="toggleReadMore('bristol')">Read more</button>
                     </div>
                 </div>
             </div>
@@ -872,15 +1035,32 @@
     </footer>
 
     <script>
+        // Toggle read more functionality
+        function toggleReadMore(caseId) {
+            const fullContent = document.getElementById(caseId + '-full');
+            const btn = event.target;
+            
+            fullContent.classList.toggle('expanded');
+            btn.classList.toggle('expanded');
+            
+            if (fullContent.classList.contains('expanded')) {
+                btn.textContent = 'Read less';
+            } else {
+                btn.textContent = 'Read more';
+            }
+        }
+
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const navHeight = document.querySelector('nav').offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
                     });
                 }
             });
@@ -911,11 +1091,9 @@
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(26, 26, 46, 0.98)';
-                nav.style.boxShadow = '0 5px 20px rgba(0,0,0,0.1)';
+                nav.classList.add('scrolled');
             } else {
-                nav.style.background = 'rgba(26, 26, 46, 0.95)';
-                nav.style.boxShadow = 'none';
+                nav.classList.remove('scrolled');
             }
         });
     </script>
